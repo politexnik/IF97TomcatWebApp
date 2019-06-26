@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300&amp;subset=cyrillic');
+
+body {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+    background: khaki;
+    margin:20px;
+}
+
+a {
+    letter-spacing: .5px;
+    word-spacing:2px;
+    padding: 10px 10px;
+    text-align:justify;
+  }
+
+.inserted {
+    margin-left: 20px;
+}
