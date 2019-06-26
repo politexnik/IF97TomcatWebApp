@@ -21,17 +21,15 @@
     </header>
 
     <main>
-        <section>
-            <h3>Аргументы функции</h3>
-            <form id="calculator" action="/calc" method="get">
-                <input type="radio" checked name="agr" value="PH" >PH
-                <input type="radio" name="agr" value="PT">PT
-                <input type="radio" name="agr" value="HS">HS
-            </form>
-        </section>
-        <section>
-            <h3>Параметры</h3>
-            <form id="calculator">
+        <form id="calculator" method="get">
+            <section>
+                <h3>Аргументы функции</h3>
+                <input type="radio" checked name="arg" value="PH" >PH
+                <input type="radio" name="arg" value="PT">PT
+                <input type="radio" name="arg" value="HS">HS
+            </section>
+            <section>
+                <h3>Параметры</h3>
                 <input name="param1" placeholder="Давление" class="param-input">
                 <select name="param1Units">
                     <option value="kgsSm2I">кгс/см2(изб)</option>
@@ -45,8 +43,11 @@
                     <option value="kcal/kg">ккал/кг</option>
                     <option value="kJ/kg">кДж/кг</option>
                 </select>
-            </form>
-        </section>
+                <br/>
+                <input type="submit" value="Рассчет">
+            </section>
+        </form>
+
         <section>
             <h3>Значения</h3>
             <p class="inserted">Давление</p>

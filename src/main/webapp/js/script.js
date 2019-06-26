@@ -2,7 +2,7 @@ var param1Units = document.getElementsByName("param1Units")[0];
 var param2Units = document.getElementsByName("param2Units")[0];
 
 //Добавляем слушатель к radioButton
-var arguments = document.getElementsByName("agr");
+var arguments = document.getElementsByName("arg");
     for (var i = 0; i < arguments.length; i++) {
         arguments[i].addEventListener("change",changeUnits);
     }
@@ -11,7 +11,7 @@ var param1Input = document.getElementsByName("param1")[0];
 var param2Input = document.getElementsByName("param2")[0];
 
 function changeUnits(){
-    var inp = document.getElementsByName("agr");
+    var inp = document.getElementsByName("arg");
     for (var i = 0; i < inp.length; i++) {
         if (inp[i].type == "radio" && inp[i].checked) {
             if (inp[i].value=="PH"){

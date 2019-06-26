@@ -24,7 +24,7 @@
                 <h3>Аргументы функции</h3>
                 <form id="calculator" action="/calc" method="get">
                     <input type="radio" checked name="agr" value="T" >Температура
-                    <input type="radio" name="agr" value="P">Давление
+                    <input type="radio" name="arg" value="P">Давление
                 </form>
             </section>
             <section>
