@@ -32,8 +32,8 @@
                 <form id="calculator">
                     <input name="param1" placeholder="Температура" class="param-input">
                     <select name="param1Units">
-                        <option value="K">K</option>
-                        <option value="C">°C</option>
+                        <option value="TEMPERATURE_K">K</option>
+                        <option value="TEMPERATURE_C">°C</option>
                     </select>
                 </form>
             </section>

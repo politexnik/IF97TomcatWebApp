@@ -1,4 +1,4 @@
-package servlet;
+package ru.politexnik.IF97WebApp.servlet;
 
 
 import org.apache.logging.log4j.LogManager;

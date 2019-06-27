@@ -8,7 +8,7 @@
   <!-- servlet for MainUrlServlet-->
   <servlet>
     <servlet-name>MainUrlServlet</servlet-name>
-    <servlet-class>servlet.MainUrlServlet</servlet-class>
+    <servlet-class>ru.politexnik.IF97WebApp.servlet.MainUrlServlet</servlet-class>
   </servlet>
   <!-- mapping for MainUrlServlet -->
   <servlet-mapping>
@@ -19,7 +19,7 @@
   <!-- servlet for MainUrlServlet-->
   <servlet>
     <servlet-name>SaturationServlet</servlet-name>
-    <servlet-class>servlet.SaturationServlet</servlet-class>
+    <servlet-class>ru.politexnik.IF97WebApp.servlet.SaturationServlet</servlet-class>
   </servlet>
   <!-- mapping for MainUrlServlet -->
   <servlet-mapping>

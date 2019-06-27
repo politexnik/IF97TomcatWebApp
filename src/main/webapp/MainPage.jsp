@@ -32,16 +32,16 @@
                 <h3>Параметры</h3>
                 <input name="param1" placeholder="Давление" class="param-input">
                 <select name="param1Units">
-                    <option value="kgsSm2I">кгс/см2(изб)</option>
-                    <option value="kgsSm2A">кгс/см2(абс)</option>
-                    <option value="MPaI">МПа(изб)</option>
-                    <option value="MPaA">МПа(абс)</option>
+                    <option value="PRESSURE_KGS_SM2_gauge">кгс/см2(изб)</option>
+                    <option value="PRESSURE_KGS_SM2_abs">кгс/см2(абс)</option>
+                    <option value="PRESSURE_MPA_abs">МПа(изб)</option>
+                    <option value="PRESSURE_MPA_gauge">МПа(абс)</option>
                 </select>
                 <br/>
                 <input name="param2" placeholder="Энтальпия" class="param-input">
                 <select name="param2Units">
-                    <option value="kcal/kg">ккал/кг</option>
-                    <option value="kJ/kg">кДж/кг</option>
+                    <option value="ENTALPHY_KKAL_KG">ккал/кг</option>
+                    <option value="ENTALPHY_KJ_KG">кДж/кг</option>
                 </select>
                 <br/>
                 <input type="submit" value="Рассчет">
@@ -50,17 +50,28 @@
 
         <section>
             <h3>Значения</h3>
-            <p class="inserted">Давление</p>
-            <p class="inserted" >Температура</p>
-            <p class="inserted">Энтальпия</p>
-            <p class="inserted">Удельный объем</p>
+            <p class="inserted">Давление
+                <%if (request.getAttribute("pressure") != null)
+                    out.print("= " + request.getAttribute("pressure"));%>
+            </p>
+            <p class="inserted" >Температура
+                <%if (request.getAttribute("temperature") != null)
+                    out.print("= " + request.getAttribute("temperature"));%>
+            </p>
+            <p class="inserted">Энтальпия
+                <%if (request.getAttribute("entalphy") != null)
+                    out.print("= " + request.getAttribute("entalphy"));%>
+            </p>
+            <p class="inserted">Удельный объем
+                <%if (request.getAttribute("volume") != null)
+                    out.print("= " + request.getAttribute("volume"));%>
+            </p>
         </section>
     </main>
 
     <footer alig="center">
         <a href="/saturation">Насыщенный пар/конденсат</a>
         <a href="../img/hs-diagram.jpg">HS-диаграмма</a>
-
     </footer>
     <script type="text/javascript" pageEncoding="UTF-8">
         <%@include file="js/script.js"%>

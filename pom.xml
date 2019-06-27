@@ -49,6 +49,14 @@
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>ru.politexnik.IF97</groupId>
+      <artifactId>IF97Functions</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/libs/IF97.jar</systemPath>
+    </dependency>
+
   </dependencies>
 
   <build>

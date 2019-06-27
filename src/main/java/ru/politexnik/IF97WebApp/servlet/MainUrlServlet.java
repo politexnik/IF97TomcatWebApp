@@ -1,16 +1,16 @@
-package servlet;
+package ru.politexnik.IF97WebApp.servlet;
 
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.politexnik.IF97Library.function.Calc;
+import ru.politexnik.IF97Library.function.Units;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
 
 public class MainUrlServlet extends HttpServlet {
     Logger log = LogManager.getLogger(MainUrlServlet.class);
@@ -27,6 +27,20 @@ public class MainUrlServlet extends HttpServlet {
             double param2 = Double.parseDouble(req.getParameter("param2"));
             String param1Units = req.getParameter("param1Units");
             String param2Units = req.getParameter("param2Units");
+
+            Units unit1 = Units.valueOf(param1Units);
+            Units unit2 = Units.valueOf(param2Units);
+
+            double param1SI = param1*unit1.getIndexA() + unit1.getIndexB();
+            double param2SI = param2*unit2.getIndexA() + unit2.getIndexB();
+
+            double entalphy = 0;
+            Calc calc = new Calc();
+            if (agr.equals("PT")) {
+                entalphy = calc.enthalpy(param1SI, param2SI);
+            }
+            req.setAttribute("entalphy", entalphy);
+
 //            Calc calc = new Calc();
 //            calc.enthalpy(param1, param2);
 //            System.out.println(calc.enthalpy(13e+5, 273.15+280));
