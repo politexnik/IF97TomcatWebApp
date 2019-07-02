@@ -1,16 +1,18 @@
 package ru.politexnik.IF97WebApp.servlet;
 
 
+import com.hummeling.if97.IF97;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.politexnik.IF97Library.function.Calc;
-import ru.politexnik.IF97Library.function.Units;
+import ru.politexnik.IF97WebApp.model.Units;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DecimalFormat;
+
 
 public class MainUrlServlet extends HttpServlet {
     Logger log = LogManager.getLogger(MainUrlServlet.class);
@@ -22,7 +24,10 @@ public class MainUrlServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         //Тип переменных
         if (req.getParameter("arg") != null) {
-            String agr = req.getParameter("arg");
+            IF97 if97 = new IF97(IF97.UnitSystem.SI);
+
+
+            String arg = req.getParameter("arg");
             double param1 = Double.parseDouble(req.getParameter("param1"));
             double param2 = Double.parseDouble(req.getParameter("param2"));
             String param1Units = req.getParameter("param1Units");
@@ -35,39 +40,49 @@ public class MainUrlServlet extends HttpServlet {
             double param2SI = param2*unit2.getIndexA() + unit2.getIndexB();
 
             double entalphy = 0;
-            Calc calc = new Calc();
-            if (agr.equals("PT")) {
-                entalphy = calc.enthalpy(param1SI, param2SI);
+            double pressure = 0;
+            double temperature = 0;
+            double volume = 0;
+            double entropy = 0;
+            if (arg.equals("PT")) {
+                entalphy = if97.specificEnthalpyPT(param1SI, param2SI);
+                pressure = param1SI;
+                temperature = param2SI;
+                volume = if97.specificVolumePT(param1SI, param2SI);
+                entropy = if97.specificEntropyPT(param1SI, param2SI);
+            } else if (arg.equals("PH")) {
+                pressure = param1SI;
+                temperature = if97.temperaturePH(param1SI, param2SI);
+                entalphy = if97.specificEnthalpyPT(param1SI, if97.temperaturePH(param1SI, param2SI));
+                volume = if97.specificVolumePT(param1SI, if97.temperaturePH(param1SI, param2SI));
+                entropy = if97.specificEntropyPT(param1SI, if97.temperaturePH(param1SI, param2SI));
+            } else if (arg.equals("PS")) {
+                pressure = param1SI;
+                temperature = if97.temperaturePH(param1SI, param2SI);
+                entalphy = if97.specificEnthalpyPT(param1SI, if97.temperaturePS(param1SI, param2SI));
+                volume = if97.specificVolumePT(param1SI, if97.temperaturePS(param1SI, param2SI));
+                entropy = if97.specificEntropyPT(param1SI, if97.temperaturePS(param1SI, param2SI));
+            } else if (arg.equals("HS")) {
+                pressure = if97.pressureHS(param1SI, param2SI);
+                temperature = if97.temperatureHS(param1SI, param2SI);
+                entalphy = if97.specificEnthalpyPT(if97.pressureHS(param1SI, param2SI), if97.temperatureHS(param1SI, param2SI));
+                volume = if97.specificVolumePT(if97.pressureHS(param1SI, param2SI), if97.temperatureHS(param1SI, param2SI));
+                entropy = if97.specificEntropyPT(if97.pressureHS(param1SI, param2SI), if97.temperatureHS(param1SI, param2SI));
             }
-            req.setAttribute("entalphy", entalphy);
-
-//            Calc calc = new Calc();
-//            calc.enthalpy(param1, param2);
-//            System.out.println(calc.enthalpy(13e+5, 273.15+280));
 
 
+
+            req.setAttribute("pressure", Math.round(pressure));
+            req.setAttribute("temperature", ((double)Math.round(temperature * 10)) / 10);
+            req.setAttribute("entalphy", Math.round(entalphy));
+            req.setAttribute("volume", ((double)Math.round(volume*1000000))/1000000);
+            req.setAttribute("entropy", Math.round(entropy));
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("MainPage.jsp");
         try {
             dispatcher.forward(req, resp);
         } catch (Exception e) {
             log.error("Fail forward to MainPage", e);
-        }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("arg") != null) {
-            String agr = (String) req.getParameter("arg");
-            System.out.println(agr);
-            double param1 = Double.parseDouble(req.getParameter("param1"));
-            System.out.println(param1);
-            double param2 = Double.parseDouble(req.getParameter("param2"));
-            System.out.println(param2);
-            String param1Units = (String) req.getParameter("param1Units");
-            System.out.println(param1Units);
-            String param2Units = (String) req.getParameter("param2Units");
-            System.out.println(param2Units);
         }
     }
 }

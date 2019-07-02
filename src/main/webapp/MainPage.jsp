@@ -24,24 +24,54 @@
         <form id="calculator" method="get">
             <section>
                 <h3>Аргументы функции</h3>
-                <input type="radio" checked name="arg" value="PH" >PH
-                <input type="radio" name="arg" value="PT">PT
-                <input type="radio" name="arg" value="HS">HS
+                <input type="radio" name="arg" value="PT"
+                <%if (request.getParameter("arg") == null)
+                                    out.print("checked");%>
+                >PT
+
+                <input type="radio" name="arg" value="PH"
+                <%if (request.getParameter("arg") != null && request.getParameter("arg").equals("PH"))
+                                    out.print("checked");%>
+                >PH
+
+                <input type="radio" name="arg" value="PS"
+                <%if (request.getParameter("arg") != null && request.getParameter("arg").equals("PS"))
+                                    out.print("checked");%>
+                >PS
+
+                <input type="radio" name="arg" value="HS"
+                <%if (request.getParameter("arg") != null && request.getParameter("arg").equals("HS"))
+                                        out.print("checked");%>
+                >HS
             </section>
             <section>
                 <h3>Параметры</h3>
-                <input name="param1" placeholder="Давление" class="param-input">
+                <input name="param1"
+                placeholder=
+                <%if (request.getParameter("param1") != null)
+                            out.print(request.getParameter("param1"));
+                    else
+                        out.print("Давление");
+                %>
+                class="param-input">
                 <select name="param1Units">
                     <option value="PRESSURE_KGS_SM2_gauge">кгс/см2(изб)</option>
-                    <option value="PRESSURE_KGS_SM2_abs">кгс/см2(абс)</option>
+                    <option checked value="PRESSURE_KGS_SM2_abs">кгс/см2(абс)</option>
                     <option value="PRESSURE_MPA_abs">МПа(изб)</option>
                     <option value="PRESSURE_MPA_gauge">МПа(абс)</option>
                 </select>
+
                 <br/>
-                <input name="param2" placeholder="Энтальпия" class="param-input">
+                <input name="param2" placeholder=
+                    <%if (request.getParameter("param2") != null)
+                                                out.print(request.getParameter("param2"));
+                        else
+                            out.print("Температура");
+                    %>
+                class="param-input">
                 <select name="param2Units">
-                    <option value="ENTALPHY_KKAL_KG">ккал/кг</option>
-                    <option value="ENTALPHY_KJ_KG">кДж/кг</option>
+                    <option value="ENTHALPY_KKAL_KG">ккал/кг</option>
+                    <option value="ENTHALPY_KJ_KG">кДж/кг</option>
                 </select>
                 <br/>
                 <input type="submit" value="Рассчет">
@@ -53,18 +83,27 @@
             <p class="inserted">Давление
                 <%if (request.getAttribute("pressure") != null)
                     out.print("= " + request.getAttribute("pressure"));%>
+                    Па
             </p>
-            <p class="inserted" >Температура
+            <p class="inserted">Температура
                 <%if (request.getAttribute("temperature") != null)
                     out.print("= " + request.getAttribute("temperature"));%>
+                                К
             </p>
             <p class="inserted">Энтальпия
                 <%if (request.getAttribute("entalphy") != null)
                     out.print("= " + request.getAttribute("entalphy"));%>
+                                Дж/кг
             </p>
             <p class="inserted">Удельный объем
                 <%if (request.getAttribute("volume") != null)
                     out.print("= " + request.getAttribute("volume"));%>
+                                м3/кг
+            </p>
+            <p class="inserted">Энтропия
+                            <%if (request.getAttribute("entropy") != null)
+                                out.print("= " + request.getAttribute("entropy"));%>
+                                Дж/кг*К
             </p>
         </section>
     </main>

@@ -21,12 +21,14 @@ function changeUnits(){
                                 "<option value=\"PRESSURE_MPA_abs\">МПа(изб)</option>" +
                                 "<option value=\"PRESSURE_MPA_gauge\">МПа(абс)</option>";
                 param2Input.placeholder = "Энтальпия";
-                param2Units.innerHTML = "<option value=\"kcal/kg\">ккал/кг</option>" +
-                                        "<option value=\"kJ/kg\">кДж/кг</option>";
-            } else if (inp[i].value=="HS"){
-                param1Input.placeholder = "Энтальпия";
-                param1Units.innerHTML = "<option value=\"ENTALPHY_KKAL_KG\">ккал/кг</option>" +
-                                        "<option value=\"ENTALPHY_KJ_KG\">кДж/кг</option>";
+                param2Units.innerHTML = "<option value=\"ENTHALPY_KKAL_KG\">ккал/кг</option>" +
+                                        "<option value=\"ENTHALPY_KJ_KG\">кДж/кг</option>";
+            } else if (inp[i].value=="PS"){
+                param1Input.placeholder = "Давление";
+                                param1Units.innerHTML = "<option value=\"PRESSURE_KGS_SM2_gauge\">кгс/см2(изб)</option>" +
+                                                "<option value=\"PRESSURE_KGS_SM2_abs\">кгс/см2(абс)</option>" +
+                                                "<option value=\"PRESSURE_MPA_abs\">МПа(изб)</option>" +
+                                                "<option value=\"PRESSURE_MPA_gauge\">МПа(абс)</option>";
                 param2Input.placeholder = "Энтропия";
                 param2Units.innerHTML = "<option value=\"ENTROPY_KKAL_KG_C\">ккал/кг·°C</option>" +
                                         "<option value=\"ENTROPY_KJ_KG_C\">кДж/кг·°C</option>";
@@ -39,6 +41,13 @@ function changeUnits(){
                 param2Input.placeholder = "Температура";
                 param2Units.innerHTML = "<option value=\"TEMPERATURE_K\">K</option>" +
                                         "<option value=\"TEMPERATURE_C\">°C</option>";
+            } else if (inp[i].value=="HS"){
+                param1Input.placeholder = "Энтальпия";
+                param1Units.innerHTML = "<option value=\"ENTHALPY_KKAL_KG\">ккал/кг</option>" +
+                                        "<option value=\"ENTHALPY_KJ_KG\">кДж/кг</option>";
+                param2Input.placeholder = "Энтропия";
+                param2Units.innerHTML = "<option value=\"ENTROPY_KKAL_KG_C\">ккал/кг·°C</option>" +
+                                        "<option value=\"ENTROPY_KJ_KG_C\">кДж/кг·°C</option>";
             } else if (inp[i].value=="P"){
                 param1Input.placeholder = "Давление";
                 param1Units.innerHTML = "<option value=\"PRESSURE_KGS_SM2_gauge\">кгс/см2(изб)</option>" +

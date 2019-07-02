@@ -57,6 +57,12 @@
       <systemPath>${project.basedir}/libs/IF97.jar</systemPath>
     </dependency>
 
+    <dependency>
+      <groupId>com.hummeling</groupId>
+      <artifactId>if97</artifactId>
+      <version>1.0.5</version>
+    </dependency>
+
   </dependencies>
 
   <build>
