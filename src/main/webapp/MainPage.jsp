@@ -1,3 +1,5 @@
+<%@ page import="ru.politexnik.IF97WebApp.model.Entry" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,54 +26,26 @@
         <form id="calculator" method="get">
             <section>
                 <h3>Аргументы функции</h3>
-                <input type="radio" name="arg" value="PT"
-                <%if (request.getParameter("arg") == null)
-                                    out.print("checked");%>
-                >PT
-
-                <input type="radio" name="arg" value="PH"
-                <%if (request.getParameter("arg") != null && request.getParameter("arg").equals("PH"))
-                                    out.print("checked");%>
-                >PH
-
-                <input type="radio" name="arg" value="PS"
-                <%if (request.getParameter("arg") != null && request.getParameter("arg").equals("PS"))
-                                    out.print("checked");%>
-                >PS
-
-                <input type="radio" name="arg" value="HS"
-                <%if (request.getParameter("arg") != null && request.getParameter("arg").equals("HS"))
-                                        out.print("checked");%>
-                >HS
+                <input type="radio" checked name="arg" value="PT" >PT
+                <input type="radio" name="arg" value="PH" >PH
+                <input type="radio" name="arg" value="PS" >PS
+                <input type="radio" name="arg" value="HS" >HS
             </section>
             <section>
                 <h3>Параметры</h3>
-                <input name="param1"
-                placeholder=
-                <%if (request.getParameter("param1") != null)
-                            out.print(request.getParameter("param1"));
-                    else
-                        out.print("Давление");
-                %>
-                class="param-input">
+                <input name="param1" placeholder="Давление" class="param-input">
                 <select name="param1Units">
                     <option value="PRESSURE_KGS_SM2_gauge">кгс/см2(изб)</option>
-                    <option checked value="PRESSURE_KGS_SM2_abs">кгс/см2(абс)</option>
+                    <option value="PRESSURE_KGS_SM2_abs">кгс/см2(абс)</option>
                     <option value="PRESSURE_MPA_abs">МПа(изб)</option>
                     <option value="PRESSURE_MPA_gauge">МПа(абс)</option>
                 </select>
-
                 <br/>
-                <input name="param2" placeholder=
-                    <%if (request.getParameter("param2") != null)
-                                                out.print(request.getParameter("param2"));
-                        else
-                            out.print("Температура");
-                    %>
-                class="param-input">
+                <input name="param2" placeholder="Температура" class="param-input">
                 <select name="param2Units">
-                    <option value="ENTHALPY_KKAL_KG">ккал/кг</option>
-                    <option value="ENTHALPY_KJ_KG">кДж/кг</option>
+                    <option value="TEMPERATURE_C">°C</option>
+                    <option value="TEMPERATURE_K">K</option>
+
                 </select>
                 <br/>
                 <input type="submit" value="Рассчет">
@@ -106,11 +80,23 @@
                                 Дж/кг*К
             </p>
         </section>
+        <section>
+            <h3>История вычислений</h3>
+            <%
+            ArrayList<Entry> historyList = (ArrayList<Entry>)request.getSession().getAttribute("historyList");
+            if (historyList != null) {
+                for (int i = 0; i < historyList.size(); i++) {
+                    out.println("<a href=\"" + historyList.get(i).getValue() + "\">" + historyList.get(i).getKey() + "</a>");
+                    out.println("<br/>");
+                }
+            }
+            %>
+        </section>
     </main>
 
-    <footer alig="center">
+    <footer alig="bottom">
+        <h3>Другие функции</h3>
         <a href="/saturation">Насыщенный пар/конденсат</a>
-        <a href="../img/hs-diagram.jpg">HS-диаграмма</a>
     </footer>
     <script type="text/javascript" pageEncoding="UTF-8">
         <%@include file="js/script.js"%>

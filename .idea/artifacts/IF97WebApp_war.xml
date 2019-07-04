@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="IF97WebApp:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>IF97WebApp</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="IF97WebApp.war">
+      <element id="artifact" artifact-name="IF97WebApp:war exploded" />
+    </root>
+  </artifact>
+</component>
