@@ -50,14 +50,6 @@
     </dependency>
 
     <dependency>
-      <groupId>ru.politexnik.IF97</groupId>
-      <artifactId>IF97Functions</artifactId>
-      <version>1.0</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/libs/IF97.jar</systemPath>
-    </dependency>
-
-    <dependency>
       <groupId>com.hummeling</groupId>
       <artifactId>if97</artifactId>
       <version>1.0.5</version>
