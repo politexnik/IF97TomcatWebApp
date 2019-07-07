@@ -84,9 +84,9 @@ public class MainUrlServlet extends HttpServlet {
 
             Entry historyEntry = new Entry(arg + "; " + param1 + " " + Units.valueOf(param1Units).getUnit() + " / " + param2 + " " + Units.valueOf(param2Units).getUnit(),
                     req.getRequestURL().toString() + "?" + req.getQueryString());
-            //Если последний добавленный элемент в historyList не такой же как этот, то дополняем
-            if (historyList.size() > 0 &&
-                    !historyList.get(historyList.size() -1).getValue().equals(historyEntry.getValue())) {
+            //Если historyList пуст либо последний добавленный элемент в historyList не такой же как этот, то дополняем
+            if ((historyList.size() == 0) || (historyList.size() > 0 &&
+                    !historyList.get(historyList.size() -1).getValue().equals(historyEntry.getValue()))) {
                     historyList.add(historyEntry);
             }
         }
