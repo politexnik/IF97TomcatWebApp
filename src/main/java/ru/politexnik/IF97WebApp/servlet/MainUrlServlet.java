@@ -19,7 +19,7 @@ public class MainUrlServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-
+        //список для отображения предыдущих полученных запросов
         ArrayList<Entry> historyList = (ArrayList<Entry>)req.getSession().getAttribute("historyList");
         if (historyList == null) {
             historyList = new ArrayList<>();
@@ -29,6 +29,7 @@ public class MainUrlServlet extends HttpServlet {
         log.debug("GET enter in MainServlet");
         resp.setCharacterEncoding("UTF-8");
         //Тип переменных
+        //Если что-то прилетает в параметрах - обрабатываем.
         if (req.getParameter("arg") != null) {
             IF97 if97 = new IF97(IF97.UnitSystem.SI);
 
